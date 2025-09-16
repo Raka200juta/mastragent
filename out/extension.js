@@ -3,25 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = require("vscode");
+const chatPanel_1 = require("./chatPanel");
 function activate(context) {
-    let disposable = vscode.commands.registerCommand('mastra.chat', async () => {
-        // buka terminal mastra agent
-        const terminal = vscode.window.createTerminal('Mastra Agent');
+    // Command untuk jalanin Mastra Agent
+    const runAgent = vscode.commands.registerCommand("mastra.run", () => {
+        const terminal = vscode.window.createTerminal("Mastra Agent");
         terminal.show();
-        terminal.sendText('cd /home/yor/ai && npm run start');
-        // loop input user
-        while (true) {
-            const message = await vscode.window.showInputBox({
-                placeHolder: 'Ketik pesan untuk Mastra (kosongkan untuk keluar)...'
-            });
-            if (!message) {
-                vscode.window.showInformationMessage('Chat Mastra ditutup.');
-                break;
-            }
-            terminal.sendText(message);
-        }
+        terminal.sendText("cd ~/ai && npm run start");
     });
-    context.subscriptions.push(disposable);
+    // Command untuk buka chat panel
+    const openChat = vscode.commands.registerCommand("mastra.chat", () => {
+        chatPanel_1.ChatPanel.createOrShow(context.extensionUri);
+    });
+    context.subscriptions.push(runAgent, openChat);
 }
 function deactivate() { }
 //# sourceMappingURL=extension.js.map

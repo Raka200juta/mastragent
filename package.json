@@ -16,6 +16,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "mastra.run",
+        "title": "Run Mastra"
+      },
+      {
         "command": "mastra.chat",
         "title": "Chat dengan Mastra"
       }
@@ -40,6 +44,7 @@
     "typescript": "^5.9.2",
     "ts-node": "^10.9.2",
     "@vscode/test-cli": "^0.0.11",
-    "@vscode/test-electron": "^2.5.2"
+    "@vscode/test-electron": "^2.5.2",
+    "node-fetch": "^3.3.2"
   }
 }
